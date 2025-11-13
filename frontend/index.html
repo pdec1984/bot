@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gate.io Grid Bot</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>Gate.io Grid Bot</h1>
+        <p>
+          Wprowadź parametry strategii grid trading, aby wygenerować gotową siatkę
+          zleceń. Domyślnie aplikacja działa w trybie <strong>dry-run</strong>, dzięki
+          czemu możesz bezpiecznie przetestować strategię przed uruchomieniem na żywo.
+        </p>
+      </header>
+
+      <section class="form-section">
+        <form id="grid-form">
+          <h2>Konfiguracja strategii</h2>
+          <label>
+            API Key
+            <input type="password" id="api-key" required />
+          </label>
+          <label>
+            API Secret
+            <input type="password" id="api-secret" required />
+          </label>
+          <label>
+            Para walutowa (np. BTC_USDT)
+            <input type="text" id="currency-pair" value="BTC_USDT" required />
+          </label>
+          <label>
+            Dolna granica ceny
+            <input
+              type="text"
+              id="lower-price"
+              inputmode="decimal"
+              placeholder="np. 25000.50"
+              required
+            />
+          </label>
+          <label>
+            Górna granica ceny
+            <input
+              type="text"
+              id="upper-price"
+              inputmode="decimal"
+              placeholder="np. 32000.00"
+              required
+            />
+          </label>
+          <label>
+            Liczba poziomów siatki
+            <input type="number" id="grid-levels" min="2" max="100" value="10" required />
+          </label>
+          <label>
+            Budżet w walucie kwotowanej (kupna)
+            <input
+              type="text"
+              id="total-quote"
+              inputmode="decimal"
+              value="100"
+              required
+            />
+          </label>
+          <label>
+            Budżet w walucie bazowej (sprzedaże)
+            <input
+              type="text"
+              id="total-base"
+              inputmode="decimal"
+              value="0"
+              required
+            />
+          </label>
+          <label class="checkbox">
+            <input type="checkbox" id="dry-run" checked /> Tryb testowy (bez składania zleceń)
+          </label>
+          <button type="submit">Uruchom strategię</button>
+        </form>
+      </section>
+
+      <section class="chart-section">
+        <h2>Wykres ceny</h2>
+        <p id="chart-status" class="chart-status">Ładowanie danych z Gate.io...</p>
+        <div class="chart-wrapper">
+          <canvas id="price-chart" aria-label="Wykres ceny" role="img"></canvas>
+        </div>
+      </section>
+
+      <section class="output" id="output">
+        <h2>Wyniki</h2>
+        <pre id="result">Wyniki pojawią się tutaj...</pre>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

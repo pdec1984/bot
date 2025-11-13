@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gate.io Grid Bot – tryb offline</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="offline">
+    <main class="container">
+      <header>
+        <h1>Gate.io Grid Bot (offline)</h1>
+        <p>
+          Ta wersja działa <strong>bez połączenia z internetem</strong> i nie wysyła żadnych
+          żądań do API. Formularz pozwala zasymulować konfigurację strategii, a wykres
+          przedstawia syntetyczne dane cenowe aktualizowane w czasie rzeczywistym.
+        </p>
+      </header>
+
+      <section class="form-section">
+        <form id="grid-form">
+          <h2>Konfiguracja strategii</h2>
+          <p class="form-hint">
+            Wartości API nie są wymagane – symulacja odbywa się lokalnie.
+          </p>
+          <label>
+            Para walutowa
+            <input type="text" id="currency-pair" value="BTC_USDT" required />
+          </label>
+          <label>
+            Dolna granica ceny
+            <input
+              type="text"
+              id="lower-price"
+              inputmode="decimal"
+              placeholder="np. 25000.50"
+              required
+            />
+          </label>
+          <label>
+            Górna granica ceny
+            <input
+              type="text"
+              id="upper-price"
+              inputmode="decimal"
+              placeholder="np. 32000.00"
+              required
+            />
+          </label>
+          <label>
+            Liczba poziomów siatki
+            <input type="number" id="grid-levels" min="2" max="100" value="10" required />
+          </label>
+          <label>
+            Budżet w walucie kwotowanej (kupna)
+            <input
+              type="text"
+              id="total-quote"
+              inputmode="decimal"
+              value="100"
+              required
+            />
+          </label>
+          <label>
+            Budżet w walucie bazowej (sprzedaże)
+            <input
+              type="text"
+              id="total-base"
+              inputmode="decimal"
+              value="0"
+              required
+            />
+          </label>
+          <button type="submit">Oblicz siatkę</button>
+        </form>
+      </section>
+
+      <section class="chart-section">
+        <h2>Symulowany wykres ceny</h2>
+        <p id="chart-status" class="chart-status"></p>
+        <div class="chart-wrapper">
+          <canvas id="price-chart" aria-label="Wykres ceny" role="img"></canvas>
+        </div>
+      </section>
+
+      <section class="output" id="output">
+        <h2>Wyniki</h2>
+        <pre id="result">Uzupełnij formularz, aby zobaczyć siatkę zleceń.</pre>
+      </section>
+    </main>
+
+    <script src="offline.js"></script>
+  </body>
+</html>
